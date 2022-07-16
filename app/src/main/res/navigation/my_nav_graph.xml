@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav_graph"
+    app:startDestination="@id/blankAFragment2">
+    <fragment
+        android:id="@+id/blankAFragment2"
+        android:name="org.xwalk.oritention.BlankAFragment"
+        android:label="home"
+        tools:layout="@layout/fragment_blank_a">
+        <action
+            android:id="@+id/action_blankAFragment2_to_blankBFragment2"
+            app:destination="@id/blankBFragment2"
+            app:enterAnim="@anim/scale"
+            app:exitAnim="@anim/scale_rotation" />
+    </fragment>
+    <fragment
+        android:id="@+id/blankBFragment2"
+        android:name="org.xwalk.oritention.BlankBFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_blank_b">
+        <action
+            android:id="@+id/action_blankBFragment2_to_blankAFragment2"
+            app:destination="@id/blankAFragment2"
+            app:enterAnim="@anim/slide_to_right"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="helloworld" />
+    </fragment>
+</navigation>
