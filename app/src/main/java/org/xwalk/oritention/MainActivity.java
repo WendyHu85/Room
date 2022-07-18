@@ -1,5 +1,7 @@
 package org.xwalk.oritention;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.savedstate.SavedStateRegistry;
@@ -24,6 +28,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -43,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
             TextView textView;
             LiveData<List<Word>>allWordsLive;
             WordViewModel wordViewModel;
+RecyclerView recyclerView;
+MyRecyclerAdapter myRecyclerAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,9 +64,22 @@ public class MainActivity extends AppCompatActivity {
                     Word word = words.get(i);
                     text.append(word.getId()).append(":").append(word.getWord()).append("=").append(word.getChineseName()).append("\n");
                 }
-                textView.setText(text);
+          //      textView.setText(text);
+                Log.d(TAG, "onChanged: "+words.size());
+                myRecyclerAdapter.setAllWords(words);
+                myRecyclerAdapter.notifyDataSetChanged();
             }
         });
+        recyclerView = findViewById(R.id.recyclerView);
+        myRecyclerAdapter = new MyRecyclerAdapter();
+        Log.d(TAG, "MyRecyclerAdapter: ");
+        recyclerView.setAdapter(myRecyclerAdapter);
+        recyclerView.setLayoutManager( new LinearLayoutManager(this));
+
+
+
+
+
         /* view model instead
         wordDatabase = Room.databaseBuilder(this,WordDatabase.class,"word_database").allowMainThreadQueries().build();
         wordDao = wordDatabase.getWordDao();
@@ -81,11 +101,23 @@ public class MainActivity extends AppCompatActivity {
         update = findViewById(R.id.update);
         delete = findViewById(R.id.delete);
         clear = findViewById(R.id.clear);
-        textView = findViewById(R.id.textView6);
+    //    textView = findViewById(R.id.textView6);
                 insert.setOnClickListener(v->{
             Word word1 = new Word("hello","你好");
             Word word2 = new Word("hello","你好啊");
-                    wordViewModel.InsertWords(word1,word2);
+            String[] word={"hello1",
+                    "hello2",
+                    "hello3",
+                    "hello4",
+                    "hello5"};
+            String[] name={"你好1",
+                            "你好2",
+                            "你好3",
+                            "你好4",
+                            "你好5"};
+            for(int i=0;i<word.length;i++) {
+                wordViewModel.InsertWords(new Word(word[i], name[i]));
+            }
           //  wordDao.insertWords(word1,word2);
             //        new InsertAsyncTasks(wordDao).execute(word1,word2);
 
