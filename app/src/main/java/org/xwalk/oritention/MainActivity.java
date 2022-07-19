@@ -59,19 +59,22 @@ MyRecyclerAdapter myRecyclerAdapter;
         wordViewModel.getAllWordsLive().observe(this, new Observer<List<Word>>() {
             @Override
             public void onChanged(List<Word> words) {
-                StringBuilder text =new StringBuilder();
-                for(int i=0;i<words.size();i++){
-                    Word word = words.get(i);
-                    text.append(word.getId()).append(":").append(word.getWord()).append("=").append(word.getChineseName()).append("\n");
+                int tmp = myRecyclerAdapter.getItemCount();
+                if(tmp!=words.size()) {
+                    StringBuilder text = new StringBuilder();
+                    for (int i = 0; i < words.size(); i++) {
+                        Word word = words.get(i);
+                        text.append(word.getId()).append(":").append(word.getWord()).append("=").append(word.getChineseName()).append("\n");
+                    }
+                    //      textView.setText(text);
+                    Log.d(TAG, "onChanged: " + words.size());
+                    myRecyclerAdapter.setAllWords(words);
+                    myRecyclerAdapter.notifyDataSetChanged();
                 }
-          //      textView.setText(text);
-                Log.d(TAG, "onChanged: "+words.size());
-                myRecyclerAdapter.setAllWords(words);
-                myRecyclerAdapter.notifyDataSetChanged();
             }
         });
         recyclerView = findViewById(R.id.recyclerView);
-        myRecyclerAdapter = new MyRecyclerAdapter();
+        myRecyclerAdapter = new MyRecyclerAdapter(wordViewModel,false);
         Log.d(TAG, "MyRecyclerAdapter: ");
         recyclerView.setAdapter(myRecyclerAdapter);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));

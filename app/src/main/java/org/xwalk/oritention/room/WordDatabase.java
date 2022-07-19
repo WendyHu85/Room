@@ -12,14 +12,14 @@ import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 //singleton
-@Database(entities = {Word.class},version = 3,exportSchema = false)
+@Database(entities = {Word.class},version = 1,exportSchema = false)
 public abstract class WordDatabase extends RoomDatabase {
     private static WordDatabase INSTANCE;
     static synchronized WordDatabase getDatabase(Context context){
         if(INSTANCE == null){
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(),WordDatabase.class,"word_database")
-                 //   .fallbackToDestructiveMigration()
-                    .addMigrations(MIGRATION_2_3)
+                    .fallbackToDestructiveMigration()
+                  //  .addMigrations(MIGRATION_3_5)
                     .build();
         }
         return INSTANCE;
@@ -39,6 +39,12 @@ public abstract class WordDatabase extends RoomDatabase {
             database.execSQL("INSERT INTO word_temp(id,english_word,chinese_meaning)"+"SELECT id,english_word,chinese_meaning FROM word");
             database.execSQL("DROP TABLE word");
             database.execSQL("ALTER TABLE word_temp RENAME to word");
+        }
+    };
+    static final Migration MIGRATION_3_5 = new Migration(3,5) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE word ADD COLUMN chinese_invisible INTEGER NOT NULL DEFAULT 0");
         }
     };
 }

@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.android.material.internal.NavigationMenu;
+
 @Entity
 public class Word {
     /* Entity Dao Database*/
@@ -14,10 +16,21 @@ public class Word {
     private String word;
     @ColumnInfo(name = "chinese_meaning")
     private String chineseName;
-    @ColumnInfo(name = "foo_data")
-    private boolean foo;
-    @ColumnInfo(name = "bar_data")
-    private boolean bar;
+
+    public boolean isChineseInvisible() {
+        return chineseInvisible;
+    }
+
+    public void setChineseInvisible(boolean chineseInvisible) {
+        this.chineseInvisible = chineseInvisible;
+    }
+
+    //    @ColumnInfo(name = "foo_data")
+//    private boolean foo;
+//    @ColumnInfo(name = "bar_data")
+//    private boolean bar;
+    @ColumnInfo(name = "chinese_invisible")
+    private boolean chineseInvisible;
 
     public Word(String word, String chineseName) {
         this.word = word;
@@ -48,19 +61,19 @@ public class Word {
         this.chineseName = chineseName;
     }
 
-    public boolean isFoo() {
-        return foo;
-    }
-
-    public void setFoo(boolean foo) {
-        this.foo = foo;
-    }
-
-    public boolean isBar() {
-        return bar;
-    }
-
-    public void setBar(boolean bar) {
-        this.bar = bar;
-    }
+//    public boolean isFoo() {
+//        return foo;
+//    }
+//
+//    public void setFoo(boolean foo) {
+//        this.foo = foo;
+//    }
+//
+//    public boolean isBar() {
+//        return bar;
+//    }
+//
+//    public void setBar(boolean bar) {
+//        this.bar = bar;
+//    }
 }
