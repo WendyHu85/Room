@@ -51,33 +51,54 @@ public class MainActivity extends AppCompatActivity {
 RecyclerView recyclerView;
 MyRecyclerAdapter myRecyclerAdapter;
 
+private  NavController navController;
+
+//https://blog.csdn.net/linminghuo/article/details/119000601
+    @Override
+    protected void onStart() {
+        super.onStart();
+        navController = Navigation.findNavController(findViewById(R.id.fragmentContainerView3));
+        NavigationUI.setupActionBarWithNavController(this,navController);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        navController.navigateUp();
+        return super.onSupportNavigateUp();
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.room_main_layout);
-        wordViewModel =  ViewModelProviders.of(this).get(WordViewModel.class);
-        wordViewModel.getAllWordsLive().observe(this, new Observer<List<Word>>() {
-            @Override
-            public void onChanged(List<Word> words) {
-                int tmp = myRecyclerAdapter.getItemCount();
-                if(tmp!=words.size()) {
-                    StringBuilder text = new StringBuilder();
-                    for (int i = 0; i < words.size(); i++) {
-                        Word word = words.get(i);
-                        text.append(word.getId()).append(":").append(word.getWord()).append("=").append(word.getChineseName()).append("\n");
-                    }
-                    //      textView.setText(text);
-                    Log.d(TAG, "onChanged: " + words.size());
-                    myRecyclerAdapter.setAllWords(words);
-                    myRecyclerAdapter.notifyDataSetChanged();
-                }
-            }
-        });
-        recyclerView = findViewById(R.id.recyclerView);
-        myRecyclerAdapter = new MyRecyclerAdapter(wordViewModel,false);
-        Log.d(TAG, "MyRecyclerAdapter: ");
-        recyclerView.setAdapter(myRecyclerAdapter);
-        recyclerView.setLayoutManager( new LinearLayoutManager(this));
+        setContentView(R.layout.word_add_main);
+
+
+
+        //add switch
+//        setContentView(R.layout.room_main_layout);
+//        wordViewModel =  ViewModelProviders.of(this).get(WordViewModel.class);
+//        wordViewModel.getAllWordsLive().observe(this, new Observer<List<Word>>() {
+//            @Override
+//            public void onChanged(List<Word> words) {
+//                int tmp = myRecyclerAdapter.getItemCount();
+//                if(tmp!=words.size()) {
+//                    StringBuilder text = new StringBuilder();
+//                    for (int i = 0; i < words.size(); i++) {
+//                        Word word = words.get(i);
+//                        text.append(word.getId()).append(":").append(word.getWord()).append("=").append(word.getChineseName()).append("\n");
+//                    }
+//                    //      textView.setText(text);
+//                    Log.d(TAG, "onChanged: " + words.size());
+//                    myRecyclerAdapter.setAllWords(words);
+//                    myRecyclerAdapter.notifyDataSetChanged();
+//                }
+//            }
+//        });
+//        recyclerView = findViewById(R.id.recyclerView);
+//        myRecyclerAdapter = new MyRecyclerAdapter(wordViewModel,false);
+//        Log.d(TAG, "MyRecyclerAdapter: ");
+//        recyclerView.setAdapter(myRecyclerAdapter);
+//        recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
 
 
@@ -99,7 +120,7 @@ MyRecyclerAdapter myRecyclerAdapter;
             }
         });
         */
-
+/*//add switch
         insert = findViewById(R.id.insert);
         update = findViewById(R.id.update);
         delete = findViewById(R.id.delete);
@@ -142,7 +163,7 @@ MyRecyclerAdapter myRecyclerAdapter;
             word.setId(37);
           //  new DeleteAsyncTasks(wordDao).execute();
 
-        });
+        });*/
 
     }
 
@@ -268,4 +289,10 @@ MyRecyclerAdapter myRecyclerAdapter;
        // return super.onSupportNavigateUp();
     }
     */
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        navController.navigateUp();
+    }
 }

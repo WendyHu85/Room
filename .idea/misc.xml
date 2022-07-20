@@ -6,10 +6,15 @@
         <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/drawable/ic_baseline_adb_24.xml" value="0.2916666666666667" />
         <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout-land/activity_main.xml" value="0.2654320987654321" />
         <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout/activity_main.xml" value="0.3546875" />
+        <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout/cell_card.xml" value="0.22" />
+        <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout/cell_normal_layout.xml" value="0.33" />
+        <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout/fragment_add.xml" value="0.18165784832451498" />
         <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout/fragment_blank_a.xml" value="0.19739583333333333" />
         <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout/fragment_blank_b.xml" value="0.19739583333333333" />
+        <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout/fragment_words.xml" value="0.18165784832451498" />
         <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout/navigation_layout.xml" value="0.19895833333333332" />
-        <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout/room_main_layout.xml" value="0.2328125" />
+        <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout/room_main_layout.xml" value="0.29583333333333334" />
+        <entry key="..\:/AndroidStudy/Oritention/app/src/main/res/layout/word_add_main.xml" value="0.1697530864197531" />
       </map>
     </option>
   </component>
@@ -18,5 +23,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>
